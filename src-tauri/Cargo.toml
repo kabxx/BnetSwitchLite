@@ -1,0 +1,64 @@
+[package]
+name = "bnetswitchlite"
+version = "1.0.0"
+description = "A local-first Battle.net account switcher: save once, switch cleanly on Windows and macOS"
+authors = ["BnetSwitchLite contributors"]
+license = "MIT"
+edition = "2024"
+rust-version = "1.85"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "bnetswitchlite_lib"
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+atomicwrites = "0.4.4"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+sha2 = "0.10"
+tauri = { version = "2.11.3", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-single-instance = "2.4.3"
+thiserror = "2"
+uuid = { version = "1", features = ["serde", "v4"] }
+
+[target.'cfg(windows)'.dependencies]
+rusqlite = { version = "0.37", features = ["backup", "bundled"] }
+windows = { version = "0.62", features = [
+  "Win32_Foundation",
+  "Win32_UI_Controls",
+  "Win32_Security",
+  "Win32_Storage_FileSystem",
+  "Win32_System_Diagnostics_ToolHelp",
+  "Win32_System_LibraryLoader",
+  "Win32_System_Com",
+  "Win32_System_Threading",
+  "Win32_UI_HiDpi",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+core-foundation = "0.10.1"
+core-foundation-sys = "0.8.7"
+libc = "0.2"
+objc2 = "0.6"
+objc2-app-kit = { version = "0.3.2", features = ["NSRunningApplication", "NSWorkspace", "block2"] }
+objc2-foundation = { version = "0.3.2", features = ["NSArray", "NSBundle", "NSDictionary", "NSError", "NSPathUtilities", "NSString", "NSURL", "NSValue"] }
+plist = "1"
+rusqlite = { version = "0.37", features = ["backup"] }
+security-framework = { version = "3.7", features = ["OSX_10_15"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+panic = "abort"
+strip = "symbols"

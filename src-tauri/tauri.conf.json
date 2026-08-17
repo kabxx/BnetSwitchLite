@@ -1,0 +1,52 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "BnetSwitchLite",
+  "mainBinaryName": "BnetSwitchLite",
+  "version": "1.0.0",
+  "identifier": "io.github.bnetswitchlite.desktop",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeDevCommand": "npm run dev -- --host 127.0.0.1 --port 1420",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "战网切号器",
+        "width": 760,
+        "height": 200,
+        "minWidth": 480,
+        "minHeight": 64,
+        "maxHeight": 680,
+        "center": true,
+        "visible": false,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' customprotocol: asset:; connect-src ipc: http://ipc.localhost; font-src 'self'; img-src 'self' asset: http://asset.localhost data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": false,
+    "category": "Utility",
+    "license": "MIT",
+    "licenseFile": "../LICENSE",
+    "publisher": "BnetSwitchLite contributors",
+    "shortDescription": "本地保存登录状态，在 Windows 和 macOS 上快速切换 Battle.net 账号",
+    "icon": [
+      "icons/32x32.png",
+      "icons/64x64.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    }
+  }
+}

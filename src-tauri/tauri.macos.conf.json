@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "bundle": {
+    "active": true,
+    "targets": ["app"],
+    "icon": ["icons/icon.icns"],
+    "macOS": {
+      "bundleName": "BnetSwitchLite",
+      "bundleVersion": "1",
+      "minimumSystemVersion": "14.0",
+      "hardenedRuntime": true
+    }
+  }
+}
